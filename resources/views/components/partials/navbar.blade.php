@@ -14,7 +14,7 @@
                     <a class="nav-link" href="{{ route('home.index') }}">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('home.index') }}">Products</a>
+                    <a class="nav-link " href="{{ route('product.create') }}">Products</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
