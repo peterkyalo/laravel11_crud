@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +16,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('/products/create', [ProductController::class, 'store'])->name('product.store');
+
+//Category Routes
+
+Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('/categories/create', [CategoryController::class, 'store'])->name('category.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
