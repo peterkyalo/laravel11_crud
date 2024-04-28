@@ -47,7 +47,11 @@
                                 </div>
 
                                 <div class="mb-3">
+<<<<<<< HEAD
                                     <label for="image" class="form-label">Upload Image</label>
+=======
+                                    <label for="image" class="form-label">Image</label>
+>>>>>>> d6a4a0299425efb4f8a3798570620bf2ff3fe385
                                     <input class="form-control" type="file" name="image" id="image">
                                 </div>
 
