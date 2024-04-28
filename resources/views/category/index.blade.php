@@ -9,11 +9,8 @@
 
                 @if (session('success'))
                     <div class="alert alert-success d-flex align-items-center" role="alert">
-                        {{-- <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
-                            <use xlink:href="#check-circle-fill" />
-                        </svg> --}}
                         <div>
-                            {{ session(success) }}
+                            {{ session('success') }}
                         </div>
                     </div>
                 @endif
@@ -23,38 +20,46 @@
                         <a href="{{ route('category.create') }}" class="btn btn-primary float-end">Add Category</a>
                     </div>
                     <div class="card-body">
-                        <div class="table table-responsive">
-                            <table class="table table-primary">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">SN</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Is Active</th>
-                                        <th scope="col">Action</th>
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SN</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Is Active</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $category)
+                                    <tr class="">
+                                        <td scope="row">{{ $category->id }}</td>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->description }}</td>
+                                        <td>
+                                            @if ($category->is_active)
+                                                active
+                                            @else
+                                                in active
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('category.edit', $category) }}"
+                                                class="btn btn-primary">Edit</a>
+                                        </td>
+                                        <td>
+                                            <form action="#" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-outline-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($categories as $category)
-                                        <tr class="">
-                                            <td scope="row">{{ $category->id }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->description }}</td>
-                                            <td>
-                                                @if ($category->is_active)
-                                                    active
-                                                @else
-                                                    in active
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-primary">Edit</a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>

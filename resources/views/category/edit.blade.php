@@ -21,11 +21,12 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <form method="POST" action="{{ route('category.store') }}">
+                            <form method="POST" action="{{ route('category.update', $category) }}">
                                 @csrf
+                                @method('PUT')
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
-                                    <input type="text" name="name" value="{{ old('name') }}"
+                                    <input type="text" name="name" value="{{ $category->name }}"
                                         class="form-control @error('name') is-invalid
                                         @enderror "
                                         id="name">
@@ -38,7 +39,7 @@
                                 <div class="form-floating mb-3">
                                     <textarea class="form-control @error('description')is-invalid
                                     @enderror"
-                                        name="description" id="description">{{ old('description') }}</textarea>
+                                        name="description" id="description">{{ $category->description }}</textarea>
                                     <label for="description">Description</label>
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
@@ -46,11 +47,11 @@
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" name="is_active" class="form-check-input" id="is_active"
-                                        {{ old('is_active') == true ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="is_active">Is
-                                        Active</label>
+                                        @if ($category->is_active) checked @else @endif <label
+                                        class="form-check-label" for="is_active">Is
+                                    Active</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
 

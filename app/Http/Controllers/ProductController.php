@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('frontend.index', ['products' => $products]);
     }
 
     /**
@@ -90,7 +91,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('frontend.product-edit', ['product' => $product]);
     }
 
     /**
@@ -98,7 +99,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name' => 'required|min:3|max:255|string',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'is_active' => 'sometimes',
+        ]);
+
+        $product->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'is_active' => $request->is_active == true ? 1:0,
+        ]);
+
+        return to_route('product.index')->with('success', 'Product updated successfully');
     }
 
     /**
