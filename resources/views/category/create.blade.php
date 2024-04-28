@@ -5,36 +5,55 @@
 
     <div class="container mt-3">
         <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
+            <div class="col-md-8">
+
+                @if (session('success'))
+                    <div class="alert alert-success d-flex align-items-center" role="alert">
+                        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+                            <use xlink:href="#check-circle-fill" />
+                        </svg>
+                        <div>
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+
+                <div class="card shadow">
                     <div class="card-header">
-                        <a href="{{ route('category.create') }}" class="btn btn-primary float-end">Add Category</a>
+                        <a href="{{ route('category.index') }}" class="btn btn-danger float-end">Back</a>
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <form>
-                                <div class="mb-3 row">
-                                    <label for="inputName" class="col-4 col-form-label">Name</label>
-                                    <div class="col-8">
-                                        <input type="text" class="form-control" name="inputName" id="inputName"
-                                            placeholder="Name" />
-                                    </div>
+                            <form method="POST" action="{{ route('category.store') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name</label>
+                                    <input type="text" name="name" value="{{ old('name') }}"
+                                        class="form-control @error('name') is-invalid
+                                        @enderror "
+                                        id="name">
+
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+
                                 </div>
-                                <fieldset class="mb-3 row">
-                                    <legend class="col-form-legend col-4">
-                                        Group name
-                                    </legend>
-                                    <div class="col-8">
-                                        you can use radio and checkboxes here
-                                    </div>
-                                </fieldset>
-                                <div class="mb-3 row">
-                                    <div class="offset-sm-4 col-sm-8">
-                                        <button type="submit" class="btn btn-primary">
-                                            Action
-                                        </button>
-                                    </div>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control @error('description')is-invalid
+                                    @enderror"
+                                        name="description" id="description">{{ old('description') }}</textarea>
+                                    <label for="description">Description</label>
+                                    @error('description')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" name="is_active" class="form-check-input" id="is_active"
+                                        {{ old('is_active') == true ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="is_active">Is
+                                        Active</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
                         </div>
 

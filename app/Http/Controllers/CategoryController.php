@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index');
+        $categories = Category::get();
+        return view('category.index', ['categories' => $categories]);
     }
 
     /**
@@ -28,7 +29,19 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required | string |max:255 ',
+            'description' => 'required | string | max:255 ',
+            'is_active' => 'sometimes',
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'is_active' => $request->is_active == true ? 1:0,
+        ]);
+
+        return back()->with('success', 'Category Created Successfully');
     }
 
     /**
