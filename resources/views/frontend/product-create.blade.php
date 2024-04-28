@@ -22,7 +22,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <form method="POST" action="{{ route('product.create') }}">
+                <form method="POST" action="{{ route('product.create') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Product Name</label>
@@ -44,6 +44,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input class="form-control" type="file" name="image" id="image">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" value="{{ old('price') }}" name="price"
                             class="form-control @error('price') is-invalid @enderror" id="price">
@@ -60,7 +65,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="is_active" class="form-check-label">Is Active</label>
                         <input type="checkbox" name="is_active" class="form-check-input" id="is_active">

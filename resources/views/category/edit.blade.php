@@ -21,7 +21,8 @@
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <form method="POST" action="{{ route('category.update', $category) }}">
+                            <form method="POST" action="{{ route('category.update', $category) }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="mb-3">
@@ -44,6 +45,17 @@
                                     @error('description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Previous Image</strong>
+                                </div>
+                                <div class="mb-3">
+                                    <img src="{{ asset('storage/' . $category->image_path) }}" width="70px"
+                                        height="70px" alt="No Image">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Upload Image</label>
+                                    <input class="form-control" type="file" name="image" id="image">
                                 </div>
                                 <div class="mb-3">
                                     <label for="is_active" class="form-check-label">Is Active</label>

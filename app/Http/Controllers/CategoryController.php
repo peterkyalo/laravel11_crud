@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderBy('created_at', 'DESC')->paginate(5);
         return view('category.index', ['categories' => $categories]);
     }
 
@@ -32,12 +33,19 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required | string |max:255 ',
             'description' => 'required | string | max:255 ',
+            'image_path' => 'nullable | image',
             'is_active' => 'sometimes',
         ]);
+        //Check if the user has sellected a file
+        if($request->hasFile('image')){
+            //get the file path & store it
+            $file_path = $request->file('image')->store('categories/images');
+        }
 
         Category::create([
             'name' => $request->name,
             'description' => $request->description,
+            'image_path' => $file_path,
             'is_active' => $request->is_active == true ? 1:0,
         ]);
 
@@ -68,12 +76,21 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required | string |max:255 ',
             'description' => 'required | string | max:255 ',
+            'image_path' => 'nullable | image',
             'is_active' => 'sometimes',
         ]);
+
+        if($request->hasFile('image') && $category->image_path){
+            Storage::delete($category->image_path);
+            $category->image_path = $request->file('image')->store('categories/images');
+        } else if($request->hasFile('image') && !$category->image_path){
+            $category->image_path = $request->file('image')->store('categories/images');
+        }
 
         $category->update([
             'name' => $request->name,
             'description' => $request->description,
+            'image_path' =>  $category->image_path,
             'is_active' => $request->is_active == true ? 1 : 0,
         ]);
 
@@ -85,6 +102,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Storage::delete($category->image_path);
         $category->delete();
         return back()->with('success', 'Category deleted successfully 😂');
     }

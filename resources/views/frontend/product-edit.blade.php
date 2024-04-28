@@ -22,7 +22,7 @@
                         {{ session('success') }}
                     </div>
                 @endif
-                <form method="POST" action="{{ route('product.update', $product) }}">
+                <form method="POST" action="{{ route('product.update', $product) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
@@ -42,6 +42,18 @@
                         @error('description')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Previous Image</strong>
+                    </div>
+                    <div class="mb-3">
+                        <img src="{{ asset('storage/' . $product->image_path) }}" width="70px" height="70px"
+                            alt="No Image">
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Upload Image</label>
+                        <input class="form-control" type="file" name="image" id="image">
                     </div>
 
                     <div class="mb-3">

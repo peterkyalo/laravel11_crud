@@ -28,6 +28,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Slug</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Image</th>
                                     <th scope="col">Is Active</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -39,6 +40,10 @@
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->slug }}</td>
                                         <td>{{ $product->description }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $product->image_path) }}" width="70px"
+                                                height="70px" alt="No image">
+                                        </td>
                                         <td>
                                             @if ($product->is_active)
                                                 active

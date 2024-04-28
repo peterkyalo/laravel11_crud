@@ -17,11 +17,12 @@
 
                 <div class="card shadow">
                     <div class="card-header">
-                        <a href="{{ route('category.index') }}" class="btn btn-danger float-end">Back</a>
+                        <a href="{{ route('category.index') }}" class="btn btn-danger float-end"><i
+                                class="bi bi-arrow-left-circle"></i></a>
                     </div>
                     <div class="card-body">
                         <div class="container">
-                            <form method="POST" action="{{ route('category.store') }}">
+                            <form method="POST" action="{{ route('category.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
@@ -44,6 +45,12 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Upload Image</label>
+                                    <input class="form-control" type="file" name="image" id="image">
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="is_active" class="form-check-label">Is Active</label>
                                     <input type="checkbox" name="is_active" class="form-check-input" id="is_active">

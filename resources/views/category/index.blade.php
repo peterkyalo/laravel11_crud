@@ -17,7 +17,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('category.create') }}" class="btn btn-primary float-end">Add Category</a>
+                        <a href="{{ route('category.create') }}" class="btn btn-primary float-end"><i
+                                class="bi bi-plus-circle mx-2"></i>Add Category</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
@@ -26,6 +27,7 @@
                                     <th scope="col">SN</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Description</th>
+                                    <th scope="col">Image</th>
                                     <th scope="col">Is Active</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -36,6 +38,10 @@
                                         <td scope="row">{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->description }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $category->image_path) }}" width="70px"
+                                                height="70px" alt="No image">
+                                        </td>
                                         <td>
                                             @if ($category->is_active)
                                                 active
