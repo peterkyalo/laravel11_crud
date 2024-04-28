@@ -64,7 +64,7 @@ class ProductController extends Controller
         ]);
 
         $product->save();
-        return to_route('product.create')->with('success', 'Product created successfully');
+        return to_route('product.index')->with('success', 'Product created successfully');
 
 //Second way of storing data using create() of Eloquent model
         // Product::create([
@@ -115,7 +115,7 @@ class ProductController extends Controller
             'is_active' => $request->is_active == true ? 1:0,
         ]);
 
-        return to_route('product.index')->with('success', 'Product updated successfully');
+        return to_route('product.index')->with('success', 'Product updated successfully! 😂');
     }
 
     /**
@@ -123,6 +123,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return back()->with('success', 'Product deleted successfully! ❌');
     }
 }

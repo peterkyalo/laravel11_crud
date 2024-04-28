@@ -45,11 +45,11 @@
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                <div class="mb-3 form-check">
+                                <div class="mb-3">
+                                    <label for="is_active" class="form-check-label">Is Active</label>
                                     <input type="checkbox" name="is_active" class="form-check-input" id="is_active"
-                                        @if ($category->is_active) checked @else @endif <label
-                                        class="form-check-label" for="is_active">Is
-                                    Active</label>
+                                        @if ($category->is_active) checked
+                                    @else @endif>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Update</button>
                             </form>

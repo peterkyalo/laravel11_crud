@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::paginate(5);
         return view('category.index', ['categories' => $categories]);
     }
 
@@ -41,7 +41,7 @@ class CategoryController extends Controller
             'is_active' => $request->is_active == true ? 1:0,
         ]);
 
-        return back()->with('success', 'Category Created Successfully');
+        return to_route('category.index')->with('success', 'Category Created Successfully');
     }
 
     /**
@@ -85,6 +85,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back()->with('success', 'Category deleted successfully 😂');
     }
 }

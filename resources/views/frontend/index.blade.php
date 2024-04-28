@@ -17,7 +17,8 @@
 
                 <div class="card shadow p-2">
                     <div class="card-header">
-                        <a href="{{ route('product.create') }}" class="btn btn-primary float-end">Add Product</a>
+                        <a href="{{ route('product.create') }}" class="btn btn-primary float-end"> <i
+                                class="bi bi-pen-fill"></i> Add Product</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
@@ -45,16 +46,17 @@
                                                 in active
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="d-flex">
                                             <a href="{{ route('product.edit', $product) }}"
-                                                class="btn btn-primary">Edit</a>
-                                        </td>
-                                        <td>
-                                            <form action="#" method="post">
+                                                class="btn btn-primary btn-sm mx-2 "><i
+                                                    class="bi bi-pencil-square"></i></a>
+
+                                            <form action="{{ route('product.destroy', $product) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-outline-danger">
-                                                    Delete
+                                                <button class="btn btn-danger btn-sm mx-1"
+                                                    onclick="return confirm('Are you sure?')">
+                                                    <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
                                         </td>

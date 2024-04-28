@@ -43,16 +43,17 @@
                                                 in active
                                             @endif
                                         </td>
-                                        <td>
+                                        <td class="d-flex">
                                             <a href="{{ route('category.edit', $category) }}"
-                                                class="btn btn-primary">Edit</a>
-                                        </td>
-                                        <td>
-                                            <form action="#" method="post">
+                                                class="btn btn-primary btn-sm mx-2"><i
+                                                    class="bi bi-pencil-square"></i></a>
+
+                                            <form action="{{ route('category.destroy', $category) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-outline-danger">
-                                                    Delete
+                                                <button class="btn btn-danger btn-sm mx-1"
+                                                    onclick="return confirm('Are you sure?')">
+                                                    <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
                                         </td>
@@ -60,6 +61,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        {{ $categories->links() }}
 
                     </div>
                 </div>

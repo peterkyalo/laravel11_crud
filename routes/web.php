@@ -15,6 +15,7 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 Route::post('/products/create', [ProductController::class, 'store'])->name('product.store');
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
 Route::put('/products/{product}/update', [ProductController::class, 'update'])->name('product.update');
+Route::delete('products/{product}/delete', [ProductController::class, 'destroy'])->name('product.destroy');
 
 //Category Routes
 Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
@@ -22,6 +23,7 @@ Route::get('/categories/create', [CategoryController::class, 'create'])->name('c
 Route::post('/categories/create', [CategoryController::class, 'store'])->name('category.store');
 Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
 Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('/categories/{category}/delete', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
