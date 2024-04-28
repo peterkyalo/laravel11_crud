@@ -17,7 +17,8 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ route('category.create') }}" class="btn btn-primary float-end">Add Category</a>
+                        <a href="{{ route('category.create') }}" class="btn btn-primary float-end"><i
+                                class="bi bi-plus-circle mx-2"></i>Add Category</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
